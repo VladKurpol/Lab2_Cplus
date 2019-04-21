@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
-
+#include <stdio.h>
 
 struct Soldier
 {
@@ -21,9 +21,40 @@ struct Soldier
 	}A;
 };
 
+void Find(Soldier *man, char *LastName, int Number)
+{
+	for (int i = 0; i < Number; i++)
+	{
+		if (strcmp(LastName, man[i].LastName) == 0)
+		{
+			std::cout << "\n";
+			std::cout << "FirstName: " << man[i].FirstName << "\n";
+			std::cout << "SecondName: " << man[i].SecondName << "\n";
+			std::cout << "LastName: " << man[i].SecondName << "\n";
+			std::cout << "Day: " << man[i].Date[0] << "\n";
+			std::cout << "Month: " << man[i].Date[1] << "\n";
+			std::cout << "Year: " << man[i].Date[2] << "\n";
+			/*std::cout << "Index: " << man[i].A.Index << "\n";
+			std::cout << "House: " << man[i].A.House << "\n";
+			std::cout << "Apartaments: " << man[i].A.Apartments << "\n";
+			std::cout << "Country: " << man[i].A.Country << "\n";
+			std::cout << "City: " << man[i].A.City << "\n";
+			std::cout << "Region: " << man[i].A.Region << "\n";
+			std::cout << "Street: " << man[i].A.Street << "\n";
+			std::cout << "Area: " << man[i].A.Area << "\n";*/
+		}
+		else
+		{
+			std::cout << "\n";
+			std::cout << "Correct your choice!" << "\n";
+		}
+	}
+}
+
 
 void InitMassive(Soldier *man, int Number)
 {
+	std::cout << "\n";
 	for (size_t i = 0; i < Number; i++)
 	{
 		std::cout << "First Name:" << "\n";
@@ -34,9 +65,9 @@ void InitMassive(Soldier *man, int Number)
 		std::cin >> man[i].SecondName;
 		std::cout << "\n";
 
-		//std::cout << "Last Name:" << "\n";
-		//std::cin >> man[i].LastName;
-		//std::cout << "\n";
+		std::cout << "Last Name:" << "\n";
+		std::cin >> man[i].LastName;
+		std::cout << "\n";
 
 		//std::cout << "Position:" << "\n";
 		//std::cin >> man[i].Position;
@@ -92,6 +123,7 @@ void InitMassive(Soldier *man, int Number)
 
 void InitNewMassive(Soldier *new_man, int Number, int Final)
 {
+	std::cout << "\n";
 	for (size_t i = Number; i < Final; i++)
 	{
 		std::cout << "First Name:" << "\n";
@@ -160,6 +192,7 @@ void InitNewMassive(Soldier *new_man, int Number, int Final)
 
 void DisplaySoldier(Soldier man)
 {
+	std::cout << "\n";
 	std::cout << "FirstName: " << man.FirstName << "\n";
 	std::cout << "SecondName: " << man.SecondName << "\n";
 	std::cout << "Day: " << man.Date[0] << "\n";
@@ -185,6 +218,7 @@ void DisplayNewArray(Soldier *new_man, int Final)
 
 void DisplayNewSoldier(Soldier new_man)
 {
+	std::cout << "\n";
 	std::cout << "FirstName: " << new_man.FirstName << "\n";
 	std::cout << "SecondName: " << new_man.SecondName << "\n";
 	std::cout << "Day: " << new_man.Date[0] << "\n";
@@ -260,6 +294,8 @@ void DateSort(Soldier *man, int Number)
 
 int main()
 {
+	char LastName[30]; // Для поиска конкретного солдата в структуре (используется в функции Find)
+
 	short Number;
 
 	std::cout << "Press the number of soldiers: " << "\n";
@@ -267,9 +303,11 @@ int main()
 
 	Soldier *man = new Soldier[Number];
 
+	std::cout << "\n";
 	std::cout << "Enter the information about soldiers: " << "\n";
 	InitMassive(man, Number);
 
+	std::cout << "\n";
 	std::cout << "This is your list of soldiers: " << "\n";
 	DisplayArray(man, Number);
 
@@ -277,7 +315,8 @@ pointer:
 
 	int choice = 0;
 
-	std::cout << "What do you want to do?" << "\n" << "1. Sort" << "\n" << "2. Add new information" << "\n" << "3. Exit" << "\n";
+	std::cout << "\n";
+	std::cout << "What do you want to do?" << "\n" << "1. Sort" << "\n" << "2. Add new information" << "\n" << "3. Find the soldier" << "\n" << "4. Exit" << "\n";
 	std::cin >> choice;
 
 	if (choice == 1)
@@ -286,12 +325,14 @@ pointer:
 
 	pointer2:
 
-		std::cout << "What sort do you want?" << "\n" << "1. Name sort" << "\n" << "2. Date sort" << "\n" << "3. Go back" << "\n";
+		std::cout << "\n";
+		std::cout << "What sort do you want?" << "\n" << "1. Name sort" << "\n" << "2. Date sort" << "\n" << "4. Exit" << "\n";
 		std::cin >> choice2;
 
 		if (choice2 == 1)
 		{
 			NameSort(man, Number);
+			std::cout << "\n";
 			std::cout << "Your new list: " << "\n";
 			DisplayArray(man, Number);
 			goto pointer2;
@@ -299,6 +340,7 @@ pointer:
 		else if (choice2 == 2)
 		{
 			DateSort(man, Number);
+			std::cout << "\n";
 			std::cout << "Your new list: " << "\n";
 			DisplayArray(man, Number);
 			goto pointer2;
@@ -309,6 +351,7 @@ pointer:
 		}
 		else
 		{
+			std::cout << "\n";
 			std::cout << "Correct your answer!" << "\n";
 			goto pointer2;
 		}
@@ -318,6 +361,7 @@ pointer:
 		int Add_Number = 0;
 		int Final = 0;
 
+		std::cout << "\n";
 		std::cout << "How many soldiers do you want to add?" << "\n";
 		std::cin >> Add_Number;
 
@@ -331,6 +375,8 @@ pointer:
 		}
 
 		InitNewMassive(new_man, Number, Final);
+
+		std::cout << "\n";
 		std::cout << "Your new list: " << "\n";
 		DisplayNewArray(new_man, Final);
 
@@ -338,15 +384,24 @@ pointer:
 	}
 	else if (choice == 3)
 	{
+		std::cout << "\n";
+		std::cout << "Enter the LastName:" << "\n";
+		std::cin >> LastName;
+		Find(man, LastName, Number);
+		goto pointer;
+	}
+	else if (choice == 4)
+	{
 		return 0;
 	}
 	else
 	{
+		std::cout << "\n";
 		std::cout << "Correct your answer! " << "\n";
 		goto pointer;
 	}
-
 	delete[] man;
 }
+
 
 
